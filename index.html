@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Páscoa Sem Açúcar — Página de Vendas</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #2f1d1b;
+      --muted: #6e5c5b;
+      --brown: #5c342e;
+      --pink-50: #fff9fb;
+      --pink-100: #fff3f7;
+      --pink-500: #d96b84;
+      --pink-600: #c5526d;
+      --line: #f1e2e7;
+      --shadow-soft: 0 10px 24px rgba(92,52,46,.08);
+      --shadow: 0 18px 40px rgba(92,52,46,.12);
+      --radius: 22px;
+      --max: 1140px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .center { text-align: center; }
+
+    .hero {
+      background:
+        radial-gradient(circle at 15% 10%, rgba(247,215,223,.65), transparent 24%),
+        radial-gradient(circle at 92% 8%, rgba(255,243,247,.95), transparent 24%),
+        linear-gradient(180deg, #fff 0%, #fffafc 100%);
+      border-bottom: 1px solid var(--line);
+      padding: 28px 0 58px;
+      overflow: hidden;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid #f3d6df;
+      background: #fff7fa;
+      color: var(--pink-600);
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: var(--shadow-soft);
+      margin: 8px auto 22px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--pink-600);
+      display: inline-block;
+    }
+
+    h1 {
+      margin: 0 auto 18px;
+      max-width: 960px;
+      font-size: clamp(36px, 6vw, 70px);
+      line-height: 1.03;
+      letter-spacing: -.04em;
+      font-weight: 900;
+    }
+
+    .accent { color: var(--pink-600); }
+
+    .sub {
+      margin: 0 auto 28px;
+      max-width: 780px;
+      color: var(--muted);
+      font-size: clamp(17px,2.1vw,22px);
+    }
+
+    .mockup-wrap {
+      width: min(880px,100%);
+      margin: 0 auto 28px;
+      padding: 10px;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: 18px 30px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, var(--pink-500) 0%, var(--pink-600) 100%);
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      box-shadow: 0 16px 30px rgba(197,82,109,.28);
+      transition: .2s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 34px rgba(197,82,109,.34);
+    }
+
+    .mini-note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .mini-note strong { color: var(--brown); }
+
+    .section { padding: 76px 0; }
+
+    .section.pink {
+      background: linear-gradient(180deg, var(--pink-50) 0%, var(--pink-100) 100%);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section.soft {
+      background: linear-gradient(180deg, #fff 0%, #fffafc 100%);
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: clamp(30px,4vw,46px);
+      line-height: 1.06;
+      letter-spacing: -.04em;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .section-sub {
+      max-width: 760px;
+      margin: 0 auto 34px;
+      color: var(--muted);
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow-soft);
+      height: 100%;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 21px;
+      line-height: 1.14;
+    }
+
+    .card p, .card li {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: #fff4f7;
+      color: var(--pink-600);
+      border: 1px solid #f4d6df;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .row-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .check {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: #ffe8ef;
+      color: var(--pink-600);
+      flex: 0 0 auto;
+      font-weight: 900;
+      margin-top: 1px;
+    }
+
+    .row-card strong {
+      display: block;
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+
+    .row-card span {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .bonus-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      padding: 16px 18px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .tag {
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+      background: #fff1f5;
+      color: var(--pink-600);
+      border: 1px solid #f2d3dc;
+    }
+
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .quote-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow-soft);
+      height: 100%;
+      text-align: left;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      flex: 0 0 auto;
+    }
+
+    .stars {
+      color: #d96b84;
+      letter-spacing: 2px;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .quote {
+      font-size: 16px;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    .author {
+      color: var(--brown);
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 2px;
+    }
+
+    .role {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .offer {
+      max-width: 920px;
+      margin: 0 auto;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff 0%, #fff6f9 100%);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .offer-top {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .price-wrap {
+      display: grid;
+      gap: 6px;
+      justify-items: center;
+      margin: 18px 0 22px;
+    }
+
+    .from {
+      font-size: 16px;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .price {
+      font-size: clamp(44px,7vw,76px);
+      line-height: 1;
+      letter-spacing: -.05em;
+      font-weight: 900;
+      color: var(--brown);
+    }
+
+    .price small {
+      font-size: .40em;
+      font-weight: 800;
+    }
+
+    .guarantee {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      font-size: 14px;
+      box-shadow: var(--shadow-soft);
+      margin-top: 18px;
+    }
+
+    .faq {
+      max-width: 920px;
+      margin: 0 auto;
+      display: grid;
+      gap: 14px;
+    }
+
+    .faq-item {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px 22px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .faq-item h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .footer-cta {
+      text-align: center;
+      padding-top: 8px;
+    }
+
+    @media (max-width: 920px) {
+      .grid-2,
+      .grid-3,
+      .grid-4,
+      .split,
+      .quote-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 60px 0;
+      }
+
+      .offer {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="container center">
+      <div class="badge"><span class="dot"></span> Edição Especial de Páscoa <span class="dot"></span></div>
+
+      <h1>
+        20 Receitas de Páscoa Sem Açúcar para Deixar Sua Páscoa
+        <span class="accent">Muito Mais Leve e Saborosa</span>
+      </h1>
+
+      <p class="sub">
+        Receitas práticas e deliciosas para pessoas com diabetes aproveitarem a Páscoa
+        sem exageros e sem abrir mão do sabor.
+      </p>
+
+      <div class="mockup-wrap">
+        <img src="https://i.ibb.co/zWHy3JcG/file-00000000f65c720ea0e4d6569b28a8ed-2.png" alt="Mockup do ebook Páscoa Sem Açúcar" />
+      </div>
+
+      <a href="https://pay.kiwify.com.br/utXaIYU" class="cta">Quero Baixar Agora</a>
+      <div class="mini-note">De <strong>R$ 29,90</strong> por apenas <strong>R$ 9,90</strong></div>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="container center">
+      <h2 class="section-title">O que você vai encontrar no ebook</h2>
+      <p class="section-sub">
+        Um material direto ao ponto, pensado para quem quer receitas bonitas,
+        fáceis de preparar e mais leves para a Páscoa.
+      </p>
+
+      <div class="grid-4">
+        <div class="card">
+          <div class="icon">01</div>
+          <h3>Ovos de Páscoa</h3>
+          <p>Receitas para fazer versões sem açúcar com visual bonito e preparo simples.</p>
+        </div>
+        <div class="card">
+          <div class="icon">02</div>
+          <h3>Trufas e bombons</h3>
+          <p>Opções práticas para servir, presentear ou incluir na sua mesa de Páscoa.</p>
+        </div>
+        <div class="card">
+          <div class="icon">03</div>
+          <h3>Sobremesas de colher</h3>
+          <p>Mousses, copinhos e cremes para variar além do chocolate tradicional.</p>
+        </div>
+        <div class="card">
+          <div class="icon">04</div>
+          <h3>Receitas organizadas</h3>
+          <p>Com rendimento, tempo de preparo, utensílios, ponto correto e armazenamento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pink">
+    <div class="container">
+      <div class="split">
+        <div>
+          <h2 class="section-title" style="text-align:left;">Tipos de receitas incluídas</h2>
+          <p class="section-sub" style="text-align:left; margin-left:0;">
+            O conteúdo foi montado para entregar variedade dentro da proposta do produto,
+            com foco em receitas de Páscoa sem açúcar que sejam úteis, bonitas e fáceis de aproveitar.
+          </p>
+
+          <div class="stack">
+            <div class="row-card">
+              <div class="check">✓</div>
+              <div>
+                <strong>Ovos simples e recheados</strong>
+                <span>Versões com creme de coco, creme de cacau e brigadeiro low carb.</span>
+              </div>
+            </div>
+
+            <div class="row-card">
+              <div class="check">✓</div>
+              <div>
+                <strong>Trufas, bombons e docinhos</strong>
+                <span>Chocolate com castanhas, café, coco, morango e amendoim.</span>
+              </div>
+            </div>
+
+            <div class="row-card">
+              <div class="check">✓</div>
+              <div>
+                <strong>Sobremesas geladas</strong>
+                <span>Mousse de chocolate, mousse de maracujá, creme de coco gelado e pudim de chia.</span>
+              </div>
+            </div>
+
+            <div class="row-card">
+              <div class="check">✓</div>
+              <div>
+                <strong>Receitas no pote e de colher</strong>
+                <span>Cheesecake low carb, copinhos cremosos, brigadeiro de colher e pavê no pote.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="padding:28px;">
+          <img src="https://i.ibb.co/zWHy3JcG/file-00000000f65c720ea0e4d6569b28a8ed-2.png" alt="Mockup do ebook Páscoa Sem Açúcar" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container center">
+      <h2 class="section-title">Um material prático, bonito e fácil de usar</h2>
+      <p class="section-sub">
+        O ebook foi montado para ser agradável de consumir e simples de executar,
+        com estrutura clara e conteúdo visualmente organizado.
+      </p>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="icon">✓</div>
+          <h3>Leitura leve</h3>
+          <p>Visual limpo, organização clara e estrutura fácil de acompanhar do começo ao fim.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">✓</div>
+          <h3>Receitas detalhadas</h3>
+          <p>Com rendimento, tempo de preparo, utensílios, preparo, ponto correto e armazenamento.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">✓</div>
+          <h3>Clima de Páscoa</h3>
+          <p>Receitas pensadas para a ocasião, com cara de sobremesa bonita para essa data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pink">
+    <div class="container">
+      <div class="split">
+        <div class="card" style="padding:28px;">
+          <h3 style="font-size:30px; margin-bottom:10px;">Bônus inclusos</h3>
+          <p style="margin:0 0 18px; color:var(--muted);">
+            Além das 20 receitas, o material inclui páginas extras para facilitar ainda mais o uso do ebook.
+          </p>
+
+          <div class="stack">
+            <div class="bonus-item">
+              <strong>Guia rápido de adoçantes</strong>
+              <span class="tag">Incluso</span>
+            </div>
+
+            <div class="bonus-item">
+              <strong>Lista de compras da Páscoa</strong>
+              <span class="tag">Incluso</span>
+            </div>
+
+            <div class="bonus-item">
+              <strong>Dicas para não errar o ponto</strong>
+              <span class="tag">Incluso</span>
+            </div>
+
+            <div class="bonus-item">
+              <strong>Orientações de uso e armazenamento</strong>
+              <span class="tag">Incluso</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="section-title" style="text-align:left;">Pensado para facilitar sua Páscoa</h2>
+          <p class="section-sub" style="text-align:left; margin-left:0;">
+            O objetivo do produto é entregar uma experiência simples: abrir, escolher a receita,
+            preparar e aproveitar. Sem complicação visual e sem excesso de informação desnecessária.
+          </p>
+
+          <div class="stack">
+            <div class="row-card">
+              <div class="check">✓</div>
+              <div>
+                <strong>Receitas com cara de sobremesa de verdade</strong>
+                <span>Sem perder o apelo visual de Páscoa e sem parecer material sem graça.</span>
+              </div>
+            </div>
+
+            <div class="row-card">
+              <div class="check">✓</div>
+              <div>
+                <strong>Estrutura organizada</strong>
+                <span>O conteúdo foi montado para ser agradável de navegar e fácil de aplicar.</span>
+              </div>
+            </div>
+
+            <div class="row-card">
+              <div class="check">✓</div>
+              <div>
+                <strong>Mais praticidade na hora de preparar</strong>
+                <span>Com informações importantes que ajudam a evitar erros básicos na execução.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section soft">
+    <div class="container center">
+      <h2 class="section-title">Quem já viu o material gostou</h2>
+      <p class="section-sub">Depoimentos de quem já entrou em contato com o ebook e aprovou a proposta.</p>
+
+      <div class="quote-grid">
+        <div class="quote-card">
+          <div class="profile">
+            <img class="avatar" src="https://i.ibb.co/67SD6NSR/Whats-App-Image-2026-03-31-at-19-14-58.jpg" alt="Mariana Silva" />
+            <div>
+              <div class="author">Mariana Silva</div>
+              <div class="role">Dona de casa e diabética há mais de 20 anos</div>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="quote">
+            “Finalmente uma Páscoa onde não precisei dizer ‘não’ para os meus filhos.
+            As receitas são incríveis e o sabor é surpreendente!”
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <div class="profile">
+            <img class="avatar" src="https://i.ibb.co/FqLj1gzh/Whats-App-Image-2026-03-31-at-19-14-58-2.jpg" alt="Carla Oliveira" />
+            <div>
+              <div class="author">Carla Oliveira</div>
+              <div class="role">Diabética há 5 anos</div>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="quote">
+            “Eu achei que nunca mais comeria um ovo de colher de verdade.
+            Esse ebook devolveu o prazer de celebrar a Páscoa. Recomendo muito!”
+          </div>
+        </div>
+
+        <div class="quote-card">
+          <div class="profile">
+            <img class="avatar" src="https://i.ibb.co/S4KMvYDW/Whats-App-Image-2026-03-31-at-19-14-58-1.jpg" alt="Beatriz Santos" />
+            <div>
+              <div class="author">Beatriz Santos</div>
+              <div class="role">Mãe e diabética há 8 anos</div>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+          <div class="quote">
+            “O guia de adoçantes salvou minhas receitas. O preço é simbólico pelo valor que entrega.
+            O bombom de avelã é meu favorito!”
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container center">
+      <h2 class="section-title">O que está incluso na sua compra</h2>
+      <p class="section-sub">Tudo o que você recebe ao garantir o ebook hoje.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="icon">1</div>
+          <h3>Ebook “Páscoa Sem Açúcar”</h3>
+          <p>Com 20 receitas organizadas em um formato visual limpo e fácil de consultar.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">2</div>
+          <h3>Conteúdo extra de apoio</h3>
+          <p>Guia de adoçantes, lista de compras, dicas para o ponto das receitas e orientações de uso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pink" id="oferta">
+    <div class="container center">
+      <h2 class="section-title">Oferta especial de Páscoa</h2>
+      <p class="section-sub">Acesso imediato ao ebook completo com 20 receitas + bônus inclusos.</p>
+
+      <div class="offer">
+        <div class="offer-top">
+          <span class="tag">Acesso imediato</span>
+          <span class="tag">Edição Especial</span>
+          <span class="tag">Entrega digital</span>
+        </div>
+
+        <div class="price-wrap">
+          <div class="from">de R$ 29,90</div>
+          <div class="price"><small>R$</small>9,90</div>
+          <div style="color: var(--muted); font-size: 14px;">Pagamento único</div>
+        </div>
+
+        <div class="stack" style="max-width:700px; margin:0 auto 24px;">
+          <div class="row-card">
+            <div class="check">✓</div>
+            <div>
+              <strong>20 receitas de Páscoa sem açúcar</strong>
+              <span>Organizadas e detalhadas para facilitar a execução.</span>
+            </div>
+          </div>
+
+          <div class="row-card">
+            <div class="check">✓</div>
+            <div>
+              <strong>Guia rápido de adoçantes</strong>
+              <span>Para entender melhor as substituições mais práticas.</span>
+            </div>
+          </div>
+
+          <div class="row-card">
+            <div class="check">✓</div>
+            <div>
+              <strong>Lista de compras da Páscoa</strong>
+              <span>Mais rapidez para separar os ingredientes principais.</span>
+            </div>
+          </div>
+
+          <div class="row-card">
+            <div class="check">✓</div>
+            <div>
+              <strong>Dicas para não errar o ponto das receitas</strong>
+              <span>Mais segurança ao preparar ovos, trufas, mousses e cremes.</span>
+            </div>
+          </div>
+        </div>
+
+        <a href="https://pay.kiwify.com.br/utXaIYU" class="cta">Quero Baixar Agora</a>
+
+        <div>
+          <div class="guarantee">Compra simples • Acesso digital • Leitura imediata</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container center">
+      <h2 class="section-title">Perguntas frequentes</h2>
+      <p class="section-sub">Alguns pontos importantes antes da compra.</p>
+
+      <div class="faq">
+        <div class="faq-item">
+          <h3>Como eu recebo o ebook?</h3>
+          <p>O acesso é digital. Depois da compra, você recebe o material para leitura imediata.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>As receitas são difíceis?</h3>
+          <p>Não. O foco do produto é praticidade. As receitas foram organizadas para facilitar a execução no dia a dia.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>O ebook tem só chocolate?</h3>
+          <p>Não. Ele reúne ovos, trufas, bombons, sobremesas geladas, copinhos e receitas no pote.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Esse material é só para a Páscoa?</h3>
+          <p>Ele foi pensado para a data, mas várias receitas também podem ser aproveitadas em outros momentos.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section pink">
+    <div class="container center">
+      <h2 class="section-title">Uma Páscoa mais gostosa, leve e prática</h2>
+      <p class="section-sub">
+        Se você quer um material bonito, fácil de usar e com receitas pensadas para essa data,
+        esse ebook entrega exatamente isso.
+      </p>
+      <a href="https://pay.kiwify.com.br/utXaIYU" class="cta">Garantir Meu Ebook por R$ 9,90</a>
+      <div class="footer-cta mini-note">Edição especial • acesso imediato</div>
+    </div>
+  </section>
+
+</body>
+</html>
